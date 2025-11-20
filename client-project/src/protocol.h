@@ -9,15 +9,48 @@
 #define PROTOCOL_H_
 
 // Shared application parameters
-#define SERVER_PORT 27015  // Server port (change if needed)
-#define BUFFER_SIZE 512    // Buffer size for messages
+#define DEFAULT_HOST "127.0.0.1"
+#define SERVER_PORT 56700  // Server port (change if needed)
+#define BUFFER_SIZE 512 // Buffer size for messages
+#define CITY_NAME_SIZE 64
 
-// Function prototypes
-// Add here the signatures of the functions implemented by students
 
+#define TEMPERATURE 't'
+#define HUMIDITY 'h'
+#define WIND_SPEED 'w'
+#define PRESSURE 'p'
+
+#define STATUS_SUCCESS 0
+#define STATUS_CITY_NOT_FOUND 1
+#define STATUS_INVALID_REQUEST 2
+
+
+//Struct del messaggio di richiesta Client->Server
+typedef struct {
+    char type;        // Weather data type: 't', 'h', 'w', 'p'
+    char city[64];    // City name (null-terminated string)
+} weather_request_t;
+
+//Struct del messaggio di risposta Server-> Client
+typedef struct {
+    unsigned int status;  // Response status code
+    char type;            // Echo of request type
+    float value;          // Weather data value
+} weather_response_t;
 /*
  * Example function to implement:
  * int connect_to_server(const char* server_address);
  */
+void argumentPort_control(int argc, char* argv[], int* port);
+unsigned int checkResponse(weather_request_t *req);
+float set_value(char type);
+float get_temperature(void);    // Range: -10.0 to 40.0 °C
+float get_humidity(void);       // Range: 20.0 to 100.0 %
+float get_wind(void);           // Range: 0.0 to 100.0 km/h
+float get_pressure(void);       // Range: 950.0 to 1050.0 hPa
+void errorhandler(char *errorMessage);
+void control_arguments(int argc, char* argv[], char** server_host, int* port, char** request_str);
+void build_msg(weather_response_t res, weather_request_t req);
+
 
 #endif /* PROTOCOL_H_ */
