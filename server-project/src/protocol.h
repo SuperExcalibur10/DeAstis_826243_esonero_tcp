@@ -44,15 +44,12 @@ typedef struct {
  * Example function to implement:
  * int handle_client(int client_socket);
  */
-void argumentPort_control(int argc, char* argv[], int* port);
-unsigned int checkResponse(weather_request_t *req);
-float set_value(char type);
+
 float get_temperature(void);    // Range: -10.0 to 40.0 °C
 float get_humidity(void);       // Range: 20.0 to 100.0 %
 float get_wind(void);           // Range: 0.0 to 100.0 km/h
 float get_pressure(void);       // Range: 950.0 to 1050.0 hPa
 void errorhandler(char *errorMessage);
-void control_arguments(int argc, char* argv[], char** server_host, int* port, char** request_str);
-void build_msg(weather_response_t res, weather_request_t req);
+
 
 #endif /* PROTOCOL_H_ */

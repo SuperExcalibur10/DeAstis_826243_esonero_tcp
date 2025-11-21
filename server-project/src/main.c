@@ -24,6 +24,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <string.h>
+#include <ctype.h>
 #include "protocol.h"
 
 #define NO_ERROR 0
@@ -52,10 +54,6 @@ void argumentPort_control(int argc, char* argv[], int* port){
 void errorhandler(char *errorMessage){
 	printf("%s", errorMessage);
 }
-
-
-#include <string.h> // Per strcmp()
-#include <ctype.h>  // Per tolower()
 
 
 unsigned int checkResponse(weather_request_t *req) {
